@@ -14,14 +14,14 @@
         <link rel="prev" href="../comments/">
       
       
-        <link rel="next" href="../language-server-settings/">
+        <link rel="next" href="../environment-variables/">
       
       
         
       
       
       <link rel="icon" href="../../img/favicon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
@@ -903,6 +903,8 @@
       
         
       
+        
+      
     
     
     
@@ -1287,6 +1289,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../environment-variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Environment variables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2312,7 +2342,7 @@
 <p><strong>pythonVersion</strong> [string, optional]: Specifies the version of Python that will be used to execute the source code. The version should be specified as a string in the format "M.m" where M is the major version and m is the minor (e.g. <code>"3.0"</code> or <code>"3.6"</code>). If a version is provided, pyright will generate errors if the source code makes use of language features that are not supported in that version. It will also tailor its use of type stub files, which conditionalizes type definitions based on the version. If no version is specified, pyright will use the version of the current python interpreter, if one is present.</p>
 </li>
 <li>
-<p><strong>pythonPlatform</strong> [string, optional]: Specifies the target platform that will be used to execute the source code. Should be one of <code>"Windows"</code>, <code>"Darwin"</code>, <code>"Linux"</code>, or <code>"All"</code>. If specified, pyright will tailor its use of type stub files, which conditionalize type definitions based on the platform. If no platform is specified, pyright will use the current platform.</p>
+<p><strong>pythonPlatform</strong> [string, optional]: Specifies the target platform that will be used to execute the source code. Should be one of <code>"Windows"</code>, <code>"Darwin"</code>, <code>"Linux"</code>, <code>"iOS"</code>, <code>"Android"</code>, or <code>"All"</code>. If specified, pyright will tailor its use of type stub files, which conditionalize type definitions based on the platform. If no platform is specified, basedpyright will default to <code>"All"</code>.</p>
 </li>
 <li>
 <p><strong>executionEnvironments</strong> [array of objects, optional]: Specifies a list of execution environments (see <a href="./#execution-environment-options">below</a>). Execution environments are searched from start to finish by comparing the path of a source file with the root path specified in the execution environment.</p>
@@ -2442,7 +2472,7 @@ to report them as "unnecessary" or "deprecated" <a href="https://microsoft.githu
 <p><a name="reportInvalidTypeForm"></a> <strong>reportInvalidTypeForm</strong> [boolean or string, optional]: Generate or suppress diagnostics for type annotations that use invalid type expression forms or are semantically invalid.</p>
 </li>
 <li>
-<p><a name="reportMissingTypeStubs"></a> <strong>reportMissingTypeStubs</strong> [boolean or string, optional]: Generate or suppress diagnostics for imports that have no corresponding type stub file (either a typeshed file or a custom type stub). The type checker requires type stubs to do its best job at analysis.</p>
+<p><a name="reportMissingTypeStubs"></a> <strong>reportMissingTypeStubs</strong> [boolean or string, optional]: Generate or suppress diagnostics for imports that have no corresponding type stub file (either a typeshed file or a custom type stub). For inline-typed third-party packages, this can also indicate that the package is missing a <code>py.typed</code> marker file. The type checker requires stubs or <a href="https://typing.python.org/en/latest/spec/distributing.html#packaging-type-information">PEP 561</a> package metadata to do its best job at analysis.</p>
 </li>
 <li>
 <p><a name="reportImportCycles"></a> <strong>reportImportCycles</strong> [boolean or string, optional]: Generate or suppress diagnostics for cyclical import chains. These are not errors in Python, but they do slow down type analysis and often hint at architectural layering issues. Generally, they should be avoided.</p>
@@ -2695,6 +2725,9 @@ to report them as "unnecessary" or "deprecated" <a href="https://microsoft.githu
 </li>
 <li>
 <p><a name="reportImplicitAbstractClass"></a> <strong>reportImplicitAbstractClass</strong> [boolean or string, optional]: Diagnostics for classes that extend abstract classes without also explicitly declaring themselves as abstract or implementing all of the required abstract methods. <a href="../../benefits-over-pyright/new-diagnostic-rules/#reportimplicitabstractclass">more info</a></p>
+</li>
+<li>
+<p><a name="reportEmptyAbstractUsage"></a> <strong>reportEmptyAbstractUsage</strong> [boolean or string, optional]: Diagnostics for classes that have no abstract methods, but explicitly extend <code>ABC</code> or <code>ABCMeta</code>. <a href="../../benefits-over-pyright/new-diagnostic-rules/#reportemptyabstractusage">more info</a></p>
 </li>
 <li>
 <p><a name="reportIncompatibleUnannotatedOverride"></a> <strong>reportIncompatibleUnannotatedOverride</strong> [boolean or string, optional]: Generate or suppress diagnostics for class variable declarations that override a symbol of the same name in a base class with a type that is incompatible with the base class symbol type, when the base class' symbol does not have a type annotation. <a href="../../benefits-over-pyright/new-diagnostic-rules/#reportincompatibleunannotatedoverride">more info</a></p>
@@ -3086,6 +3119,15 @@ to report them as "unnecessary" or "deprecated" <a href="https://microsoft.githu
 <td style="text-align: left;">"error"</td>
 <td style="text-align: left;">"error"</td>
 <td style="text-align: left;">"error"</td>
+<td style="text-align: left;">"error"</td>
+</tr>
+<tr>
+<td style="text-align: left;">reportEmptyAbstractUsage</td>
+<td style="text-align: left;">"none"</td>
+<td style="text-align: left;">"none"</td>
+<td style="text-align: left;">"none"</td>
+<td style="text-align: left;">"none"</td>
+<td style="text-align: left;">"warning"</td>
 <td style="text-align: left;">"error"</td>
 </tr>
 <tr>
